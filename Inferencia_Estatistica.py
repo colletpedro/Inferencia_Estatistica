@@ -1,18 +1,21 @@
 import random
+import string
 
-opcoes = ["Pedra", "Papel", "Tesoura"]
-jogador = random.choice(opcoes)
-computador = random.choice(opcoes)
-#quem he quem
-print(f"Jogador: {jogador}")
-print(f"Computador: {computador}")
+def gerador_senha(tamanho=12):
+    # Definindo os caracteres que podem ser usados na senha
+    letras_maiusculas = string.ascii_uppercase  # A-Z
+    letras_minusculas = string.ascii_lowercase  # a-z
+    numeros = string.digits  # 0-9
+    caracteres_especiais = string.punctuation  # !@#$%^&*()
 
-if jogador == computador:
-    print("Empate!")
-    #blablabla
-elif (jogador == "Pedra" and computador == "Tesoura") or \
-     (jogador == "Papel" and computador == "Pedra") or \
-     (jogador == "Tesoura" and computador == "Papel"):
-    print("Jogador venceu!")
-else:
-    print("Computador venceu!")
+    # Combina todos os caracteres
+    todos_os_caracteres = letras_maiusculas + letras_minusculas + numeros + caracteres_especiais
+
+    # Gerando a senha aleatória
+    senha = ''.join(random.choice(todos_os_caracteres) for _ in range(tamanho))
+    return senha
+
+# Solicitar o comprimento da senha ao usuário
+tamanho = int(input("Digite o tamanho da senha desejada: "))
+senha_gerada = gerador_senha(tamanho)
+print(f"Senha gerada: {senha_gerada}")
